@@ -16,7 +16,6 @@
 
 package com.android.internal.telephony;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -908,7 +907,10 @@ public abstract class SMSDispatcher extends Handler {
      * @return Returns a CharSequence containing the item's label. If the
      * item does not have a label, its name is returned.
      */
-    private CharSequence convertSafeLabel(@NonNull String labelStr, String appPackage) {
+    private CharSequence convertSafeLabel(String labelStr, String appPackage) {
+        if (labelStr == null) {
+            return appPackage;
+        }
         // If the label contains new line characters it may push the UI
         // down to hide a part of it. Labels shouldn't have new line
         // characters, so just truncate at the first time one is seen.
